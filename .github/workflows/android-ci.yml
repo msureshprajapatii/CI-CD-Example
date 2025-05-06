@@ -1,42 +1,35 @@
-name: Android CI Workflow  # This is the name you will see in the GitHub Actions tab
+name: Android CI Workflow
 
 on:
   push:
-    branches:
-      - main  # Run CI when pushing to the main branch
+    branches: [ main ]
   pull_request:
-    branches:
-      - main  # Run CI when PR is made toward the main branch
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
     name: Build Android App
-    runs-on: ubuntu-latest  # Use Ubuntu runner (a Linux machine on GitHub's cloud)
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
-        # Downloads your project code into the runner so the workflow can use it
+        uses: actions/checkout@v3.5.3
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3.13.0
         with:
           distribution: 'temurin'
           java-version: '17'
-        # Android Gradle plugin requires Java 17
 
       - name: Give Gradle permissions
         run: chmod +x ./gradlew
-        # Make the Gradle wrapper executable on Linux
 
       - name: Build the app
         run: ./gradlew assembleDebug
-        # Builds the debug APK
 
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4  # Updated from v3 to v4
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
-        # Stores the APK so you can download it from GitHub after build
