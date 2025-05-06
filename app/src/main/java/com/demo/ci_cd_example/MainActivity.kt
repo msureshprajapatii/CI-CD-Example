@@ -1,6 +1,7 @@
 package com.demo.ci_cd_example
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,8 @@ import com.demo.ci_cd_example.ui.theme.CICDExampleTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("CI", "Testing GitHub Actions")
+
         setContent {
             CICDExampleTheme {
                 // A surface container using the 'background' color from the theme
