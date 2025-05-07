@@ -25,6 +25,11 @@ jobs:
       - name: Give Gradle permissions
         run: chmod +x ./gradlew
 
+      - name: Set Version Code and Name
+        run: |
+          echo "VERSION_CODE=$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "VERSION_NAME=1.0.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+            
       - name: Build the app
         run: ./gradlew assembleDebug
 
